@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+
+<body>
+    <script>
+        function RandomColor(visi) {
+            var r = Math.floor(Math.random() * 255);
+            var g = Math.floor(Math.random() * 255);
+            var b = Math.floor(Math.random() * 255);
+            var result = 'rgba(' + String(r) + ',' + String(g) + ',' + String(b) + ',' + String(visi) + ')'
+            return result;
+        }
+        function Generator(dataLength, visi) {
+            var result = []
+            for (var i = 0; i < dataLength; i++) { result.push(RandomColor(visi)); }
+            return result;
+        }
+    </script>
+
+    <div id="piechart_3d"></div>
+    <script>
+        
+        google.charts.load("current", { packages: ["corechart"] });
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Prev page', 'count'],
+    
+                <% for(var i = 0; i<col.length-1; i++) { %>
+                    [ '<%=col[i]%>' , <%=data[i]%> ],
+                <% } %>
+                ['<%=col[col.length-1]%>',<%=data[data.length-1]%>]
+            ]);
+
+            var options = {
+                is3D: true
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+            chart.draw(data, options);
+        }
+    </script>
+</body>
+
+</html>

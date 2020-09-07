@@ -1,0 +1,310 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!-- 합쳐지고 최소화된 최신 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <!-- 부가적인 테마 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+    <link type="text/css" href="../../css/server.css" rel="stylesheet">
+    <!-- Icons -->
+    <link href="../../vendor/nucleo/css/nucleo.css" rel="stylesheet">
+    <link href="../../vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
+    <div class="container-fluid">
+      <!-- Brand -->
+      <a class="navbar-brand pt-0" href="/">
+        <img src="../../images/brand.png" class="navbar-brand-img" alt="...">
+      </a>
+      <!-- Collapse -->
+      <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+
+        <!-- Navigation -->
+        <ul class="navbar-nav">
+          <li class="nav-item"  style="margin-bottom:1.5rem">
+            <a class="nav-link" href="/list">
+              <i class="ni ni-planet text-blue"></i> Dashboard
+            </a>
+          </li>
+          <li class="nav-item" style="margin-bottom:1.5rem">
+            <a class="nav-link" href="/">
+              <i class="ni ni-bullet-list-67 text-red"></i> Chart
+            </a>
+          </li>
+          <li class="nav-item" style="margin-bottom:1.5rem">
+            <a class="nav-link" href="/">
+              <i class="ni ni-key-25 text-info"></i> Login
+            </a>
+          </li>
+          <li class="nav-item" style="margin-bottom:1.5rem">
+            <a class="nav-link" href="/">
+              <i class="ni ni-circle-08 text-pink"></i> Register
+            </a>
+          </li>
+        </ul>
+
+        <!-- Divider -->
+      <hr class="my-3">
+      <!-- Heading -->
+      <h6 class="navbar-heading text-muted">Documentation</h6>
+      <!-- Navigation -->
+      <ul class="navbar-nav mb-md-3">
+        <li class="nav-item">
+          <a class="nav-link" href="/developer">
+            <i class="ni ni-spaceship"></i> Developer
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/sponsor ">
+            <i class="ni ni-palette"></i> Sponsor
+          </a>
+        </li>
+      </ul>
+
+      </div>
+    </div>
+  </nav>
+
+  <div class="main-content">
+
+    <!-- Top navbar -->
+    <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
+      <div class="container-fluid">
+        <!-- Brand -->
+        <% var list = JSON.parse(jdata).list; %>
+        <a class="h1 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="/" style="font-size:30px;">
+          <%=list[idx].name%></a>
+      </div>
+    </nav>
+    <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+      <div class="container-fluid">
+        <div class="header-body">
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid mt--7">
+      <div class="row">
+        <div class="col">
+          <div class="card shadow">
+            <div class="container">
+              <% var chart = JSON.parse(jdata).list[idx].chart; %>
+
+              <table style="margin-bottom:10rem; margin-top:5rem; margin-left:-15rem; margin-right: 5rem;">
+                  <tbody>
+                      <%
+                          var i,j;
+                          var next=0;
+                          var row=(chart.length)/3;
+                          var reminder=(chart.length)%3;
+                          for(i = 0; i<parseInt(row); i++)
+                           {
+                      %>
+
+                      <tr>
+                          <%
+                              for( j = 0; j<3; j++)
+                          {
+                          %>
+
+                          <% if(chart[i*3+j].name==1) { %>
+                          <td style="padding-right:5rem"> <iframe width="400" height="300" src="/barChart" frameborder=0 framespacing=0 marginheight=0
+                                  marginwidth=0 scrolling=no vspace=0 style="margin-left:2rem; margin-right:2rem; margin-top:5rem; margin-bottom:2rem"></iframe>
+                          </td>
+                          <% } %>
+                          <% if(chart[i*3+j].name==2) { %>
+                          <td style="padding-right:5rem"> <iframe width="400" height="300" src="/horizontalBar" frameborder=0 framespacing=0 marginheight=0
+                                  marginwidth=0 scrolling=no vspace=0 style="margin-left:2rem; margin-right:2rem; margin-top:5rem; margin-bottom:2rem"></iframe></td>
+                          <% } %>
+                          <% if(chart[i*3+j].name==3) { %>
+                          <td style="padding-right:5rem"> <iframe width="400" height="300" src="/pieChart" frameborder=0 framespacing=0 marginheight=0
+                                  marginwidth=0 scrolling=no vspace=0 style="margin-left:2rem; margin-right:2rem; margin-top:5rem; margin-bottom:2rem"></iframe></td>
+                          <% } %>
+                          <% if(chart[i*3+j].name==4) { %>
+                          <td style="padding-right:5rem"> <iframe width="400" height="300" src="/donutChart" frameborder=0 framespacing=0 marginheight=0
+                                  marginwidth=0 scrolling=no vspace=0 style="margin-left:2rem; margin-right:2rem; margin-top:5rem; margin-bottom:2rem"></iframe></td>
+                          <% } %>
+                          <% if(chart[i*3+j].name==5) { %>
+                          <td style="padding-right:5rem">
+                              <iframe width="400" height="300" src="/lineChart" frameborder=0 framespacing=0 marginheight=0
+                                  marginwidth=0 scrolling=no vspace=0 style="margin-left:2rem; margin-right:2rem; margin-top:5rem; margin-bottom:2rem"></iframe>
+                          </td>
+                          <% } %>
+                          <% if(chart[i*3+j].name==6) { %>
+                          <td style="padding-right:5rem">
+                                  <iframe width="400" height="300" src="/table" frameborder=0 framespacing=0 marginheight=0
+                                  marginwidth=0 scrolling="yes" vspace=0 style="margin-left:2rem; margin-right:2rem; margin-top:4rem; margin-bottom:2rem"></iframe>
+                          </td>
+                          <% } %>
+                          <% if(chart[i*3+j].name==7) { %>
+                          <td style="padding-right:5rem">
+                              <div class="panel panel-primary" style="margin-left:2rem; margin-right:2rem; margin-top:7rem; margin-bottom:2rem">
+                                  <div class="panel-body" style="font-size:15px; font-weight:bold; text-align:center">
+                                      Total Log Count
+                                  </div>
+                                  <div class="panel-footer" style="font-size:15px; font-weight:bold; text-align:center"><%=countlog%></div>
+                              </div>
+                          </td>
+                          <% } %>
+                          <% if(chart[i*3+j].name==8) { %>
+                          <td style="padding-right:5rem">
+                              <div class="panel panel-warning" style="margin-left:2rem; margin-right:2rem; margin-top:7rem; margin-bottom:2rem">
+                                  <div class="panel-body" style="font-size:15px; font-weight:bold; text-align:center">
+                                      Total Bytes
+                                  </div>
+                                  <div class="panel-footer" style="font-size:15px; font-weight:bold; text-align:center"><%=bytesum%></div>
+                              </div>
+                          </td>
+                          <% } %>
+                          <% if(chart[i*3+j].name==9) { %>
+                          <td style="padding-right:5rem">
+                              <iframe width="400" height="300" src="/piechart3d" frameborder=0 framespacing=0 marginheight=0
+                                  marginwidth=0 scrolling=no vspace=0 style="margin-left:2rem; margin-right:2rem; margin-top:5rem; margin-bottom:2rem"></iframe>
+                          </td>
+                          <% } %>
+                          <% if(chart[i*3+j].name==10) { %>
+                          <td style="padding-right:5rem">
+                              <iframe width="400" height="300" src="/mapChart" frameborder=0 framespacing=0 marginheight=0
+                                  marginwidth=0 scrolling=no vspace=0 style="margin-left:2rem; margin-right:2rem; margin-top:5rem; margin-bottom:2rem"></iframe>
+                          </td>
+                          <% } %>
+
+
+                          <%
+                              next=i*3+j;
+                          }
+                          %>
+                      </tr>
+
+                      <%
+                          }
+                          %>
+
+                      <%
+                          if(parseInt(reminder)!=0) {
+                          %>
+                      <tr>
+
+                          <%
+                              }
+                          %>
+                          <%
+                          var nnext=0;
+                          console.log(next);
+                          if(next != 0) nnext=++next;
+
+                          for(var k = 0; k<parseInt(reminder); k++)
+                      {
+
+                      %>
+                          <% console.log(nnext); %>
+                          <% if(chart[nnext].name==1) { %>
+                          <td style="padding-right:5rem"> <iframe width="400" height="300" src="/barChart" name="test" id="test" frameborder=0 framespacing=0
+                                  marginheight=0 marginwidth=0 scrolling=no vspace=0 style="margin-left:2rem; margin-right:2rem; margin-top:5rem; margin-bottom:2rem"></iframe>
+                          </td>
+                          <% } %>
+                          <% if(chart[nnext].name==2) { %>
+                          <td style="padding-right:5rem"> <iframe width="400" height="300" src="/horizontalBar" frameborder=0 framespacing=0 marginheight=0
+                                  marginwidth=0 scrolling=no vspace=0 style="margin-left:2rem; margin-right:2rem; margin-top:5rem; margin-bottom:2rem"></iframe></td>
+                          <% } %>
+                          <% if(chart[nnext].name==3) { %>
+                          <td style="padding-right:5rem"><iframe width="400" height="300" src="/pieChart" frameborder=0 framespacing=0 marginheight=0
+                                  marginwidth=0 scrolling=no vspace=0 style="margin-left:2rem; margin-right:2rem; margin-top:5rem; margin-bottom:2rem"></iframe></td>
+                          <% } %>
+                          <% if(chart[nnext].name==4) { %>
+                          <td> <iframe width="400" height="300" src="/donutChart" frameborder=0 framespacing=0 marginheight=0
+                                  marginwidth=0 scrolling=no vspace=0 style="margin-left:2rem; margin-right:2rem; margin-top:5rem; margin-bottom:2rem"></iframe></td>
+                          <% } %>
+                          <% if(chart[nnext].name==5) { %>
+                          <td style="padding-right:5rem">
+                              <iframe width="400" height="300" src="/lineChart" frameborder=0 framespacing=0 marginheight=0
+                                  marginwidth=0 scrolling=no vspace=0 style="margin-left:2rem; margin-right:2rem; margin-top:5rem; margin-bottom:2rem"></iframe>
+                          </td>
+                          <% } %>
+                          <% if(chart[nnext].name==6) { %>
+                          <td style="padding-right:5rem">
+                                  <iframe width="400" height="300" src="/table" frameborder=0 framespacing=0 marginheight=0
+                                  marginwidth=0 scrolling="yes" vspace=0 style="margin-left:2rem; margin-right:2rem; margin-top:5rem; margin-bottom:2rem"></iframe>
+                          </td>
+                          <% } %>
+                          <% if(chart[nnext].name==7) { %>
+                          <td style="padding-right:5rem">
+                              <div class="panel panel-primary" style="margin-left:2rem; margin-right:2rem; margin-top:7rem; margin-bottom:2rem">
+                                  <div class="panel-body" style="font-size:15px; font-weight:bold; text-align:center">
+                                      Total Log Count
+                                  </div>
+                                  <div class="panel-footer" style="font-size:15px; font-weight:bold; text-align:center"><%=countlog%></div>
+                              </div>
+                          </td>
+                          <% } %>
+                          <% if(chart[nnext].name==8) { %>
+                          <td style="padding-right:5rem">
+                              <div class="panel panel-warning" style="margin-left:2rem; margin-right:2rem; margin-top:8rem; margin-bottom:2rem">
+                                  <div class="panel-body" style="font-size:15px; font-weight:bold; text-align:center">
+                                      Total bytes
+                                  </div>
+                                  <div class="panel-footer" style="font-size:15px; font-weight:bold; text-align:center"><%=bytesum%></div>
+                              </div>
+                          </td>
+                          <% } %>
+                          <% if(chart[nnext].name==9) { %>
+                          <td style="padding-right:5rem">
+                              <iframe width="400" height="300" src="/piechart3d" frameborder=0 framespacing=0 marginheight=0
+                                  marginwidth=0 scrolling=no vspace=0 style="margin-left:2rem; margin-right:2rem; margin-top:5rem; margin-bottom:2rem"></iframe>
+
+                          </td>
+                          <% } %>
+                          <% if(chart[nnext].name==10) { %>
+                          <td style="padding-right:5rem">
+                              <iframe width="400" height="300" src="/mapChart" frameborder=0 framespacing=0 marginheight=0
+                                  marginwidth=0 scrolling=no vspace=0 style="margin-left:2rem; margin-right:2rem; margin-top:5rem; margin-bottom:2rem"></iframe>
+                          </td>
+                          <% } %>
+                          <%
+                              nnext++;
+                          }
+                          %>
+
+
+                          <%
+                      if(parseInt(reminder)!=0) {
+                      %>
+                      </tr>
+
+                      <%
+                          }
+
+                                  %>
+
+
+                  </tbody>
+              </table>
+              <button type="button" class="btn btn-primary btn-lg" onClick="location.href='/list/<%=idx+1%>/select'" style="font-size:15px; font-weight:bold; margin-left: 50rem; margin-bottom:10rem">add new
+                  chart</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="/js/myChart.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+<script src="https://cdn.rawgit.com/chartjs/Chart.js/master/samples/utils.js"></script>
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+</html>

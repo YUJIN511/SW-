@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+</head>
+
+<body>
+    <script>
+        function RandomColor(visi) {
+            var r = Math.floor(Math.random() * 255);
+            var g = Math.floor(Math.random() * 255);
+            var b = Math.floor(Math.random() * 255);
+            var result = 'rgba(' + String(r) + ',' + String(g) + ',' + String(b) + ',' + String(visi) + ')'
+            return result;
+        }
+        function Generator(dataLength, visi) {
+            var result = []
+            for (var i = 0; i < dataLength; i++) { result.push(RandomColor(visi)); }
+            return result;
+        }
+    </script>
+    <script>
+        var responseCodeCol = <%- JSON.stringify(responseCode[0]) %>;
+        var responseCodeData = [<%= responseCode[1] %>];
+      </script>
+
+    <canvas id="pieChart"></canvas>
+    <script>
+       var ctxP = document.getElementById("pieChart");
+if(ctxP!=null) {
+  ctxP.getContext('2d');
+var myPieChart = new Chart(ctxP, {
+  type: 'pie',
+  data: {
+    labels: responseCodeCol,
+    datasets: [{
+      label: "Page Status",
+      data: responseCodeData,
+      backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"],
+        hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774"]
+    }]
+  },
+  options: {
+    responsive: true
+  }
+});
+}
+    </script>
+</body>
+
+</html>

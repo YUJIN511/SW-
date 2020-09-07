@@ -1,0 +1,151 @@
+<html>
+
+<head>
+    <!-- 합쳐지고 최소화된 최신 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <!-- 부가적인 테마 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link type="text/css" href="css/server.css" rel="stylesheet">
+    <!-- Icons -->
+    <link href="vendor/nucleo/css/nucleo.css" rel="stylesheet">
+    <link href="vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+
+    <style>
+    body{
+      padding:20px 20px;
+    }
+
+    .results tr[visible='false'],
+    .no-result{
+      display:none;
+    }
+
+    .results tr[visible='true']{
+      display:table-row;
+    }
+
+    .counter{
+      padding:8px;
+      color:#ccc;
+    }
+    </style>
+
+</head>
+<body>
+    <% include ./partials/sidebar %>
+
+    <div class="main-content">
+      <!-- Top navbar -->
+      <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
+        <div class="container-fluid">
+          <!-- Brand -->
+          <a class="h1 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="/" style="font-size:30px;">
+            Dashboard</a>
+
+        </div>
+      </nav>
+      <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+        <div class="container-fluid">
+          <div class="header-body">
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid mt--7">
+        <div class="row">
+          <div class="col">
+            <div class="card shadow">
+              <div class="card-header border-0">
+                <h1 class="mb-0" style="font-size:20px;">Dashboard Tables</h3>
+              </div>
+              <div class="card-body">
+                      <% var list = JSON.parse(jdata).list; %>
+                      <div class="form-group pull-right">
+                          <input type="text" class="search form-control" placeholder="search" style="font-size:15px; font-weight:bold">
+                      </div>
+                      <span class="counter pull-right"></span>
+                      <table class="table table-hover table-bordered results">
+                          <thead class="thead-light">
+                            <tr>
+                              <th>#</th>
+                              <th col-md-5 col-xs-5>content</th>
+                              <th col-md-5 col-xs-5>action</th>
+                            </tr>
+                            <tr class="warning no-result">
+                              <td colspan="4" style="font-size:15px; font-weight:bold"><i class="fa fa-warning"></i> No result</td>
+                            </tr>
+                          </thead>
+                          <%
+                                      for(var i = 0; i<list.length; i++)
+                                  {
+                                  %>
+                          <tbody >
+                              <tr>
+                                  <td style="font-size:15px; font-weight:bold"><%=i+1%></td>
+                                  <td style="font-size:15px; font-weight:bold"><a href="/list/<%=i+1%>"><%=list[i].name%></td>
+                                  <td>
+                                      <div class="btn-group" role="group" >
+                                          <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle"
+                                              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:15px; font-weight:bold">
+                                              edit
+                                          </button>
+                                          <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                              <a class="dropdown-item" href="/list/<%=i+1%>/delete" style="font-size:15px">delete</a>
+                                              <script type="text/javascript">
+                                                function modify(){
+                                                  var input = prompt("Input Rename");
+
+                                                  if(input == null){
+                                                    <%= console.log('null') %>
+                                                  }
+                                                  else{
+                                                    <%= console.log('input') %>
+
+                                                    fs.readFile('./board_list.json', {
+                                                  		'encoding': 'utf8'
+                                                  	}, function (err, data) {
+                                                  		data = JSON.parse(data);
+                                                    });
+                                                    data.list[idx-1].name=input;
+
+                                                    fs.writeFile('./board_list.json', JSON.stringify(data), function (err) {
+                                                			res.redirect('/list');
+                                                		});
+                                                  }
+
+                                                }
+                                              </script>
+                                              <a class="dropdown-item" onclick ="modify()" style="font-size:15px">modify</a>
+                                          </div>
+                                      </div>
+                                  </td>
+                              </tr>
+                          </tbody>
+                          <%
+                                  }
+                                  %>
+                      </table>
+                      <button type="button" class="btn btn-primary btn-lg" onClick="location.href='create'"style="font-size:15px; font-weight:bold; margin-left: 50rem; margin-top:5rem" >create new dashboard</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+</body>
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+<script src="js/Searchbar.js"></script>
+</html>

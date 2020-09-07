@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+</head>
+
+<body>
+    <script>
+        function RandomColor(visi) {
+            var r = Math.floor(Math.random() * 255);
+            var g = Math.floor(Math.random() * 255);
+            var b = Math.floor(Math.random() * 255);
+            var result = 'rgba(' + String(r) + ',' + String(g) + ',' + String(b) + ',' + String(visi) + ')'
+            return result;
+        }
+        function Generator(dataLength, visi) {
+            var result = []
+            for (var i = 0; i < dataLength; i++) { result.push(RandomColor(visi)); }
+            return result;
+        }
+    </script>
+
+<script>
+    var urlCol = <%- JSON.stringify(url[0]) %>;
+    var urlData = [<%= url[1] %>];
+
+  </script>
+
+    <canvas id="horizontalBar"></canvas>
+    <script>
+        var ctxH=document.getElementById("horizontalBar");
+if(ctxH!=null){
+  ctxH.getContext('2d');
+  var horizonBar = new Chart(ctxH, {
+    "type": "horizontalBar",
+    "data": {
+      "labels": urlCol,
+      "datasets": [{
+        "label": "Top url rank",
+        "data": urlData,
+        "fill": false,
+        "backgroundColor": ["rgba(255, 99, 132, 0.2)", "rgba(255, 159, 64, 0.2)",
+          "rgba(255, 205, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(54, 162, 235, 0.2)",
+          "rgba(153, 102, 255, 0.2)", "rgba(201, 203, 207, 0.2)"
+        ],
+        "borderColor": ["rgb(255, 99, 132)", "rgb(255, 159, 64)", "rgb(255, 205, 86)",
+          "rgb(75, 192, 192)", "rgb(54, 162, 235)", "rgb(153, 102, 255)", "rgb(201, 203, 207)"
+        ],
+        "borderWidth": 1
+      }]
+    },
+    "options": {
+      "scales": {
+        "xAxes": [{
+          "ticks": {
+            "beginAtZero": true
+          }
+        }]
+      }
+    }
+  });
+}
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script>
+        
+      </script>
+
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Time', 'Count'],
+          <% for (var i = 0; i < col.length - 1; i++) { %>
+                ['<%=col[i]%>', <%=data[i] %> ],
+                <% } %>
+                ['<%=col[col.length-1]%>',<%=data[data.length - 1] %>]
+        ]);
+
+        var options = {
+        hAxis: {title: 'Hour'},
+        legend: 'none'
+        };
+
+        var chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
+
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="chart_div"></div>
+  </body>
+</html>

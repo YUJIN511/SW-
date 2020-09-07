@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+</head>
+
+<body>
+    <script>
+        function RandomColor(visi) {
+            var r = Math.floor(Math.random() * 255);
+            var g = Math.floor(Math.random() * 255);
+            var b = Math.floor(Math.random() * 255);
+            var result = 'rgba(' + String(r) + ',' + String(g) + ',' + String(b) + ',' + String(visi) + ')'
+            return result;
+        }
+        function Generator(dataLength, visi) {
+            var result = []
+            for (var i = 0; i < dataLength; i++) { result.push(RandomColor(visi)); }
+            return result;
+        }
+    </script>
+
+    <script>
+        var dayLogCol = <%- JSON.stringify(dayLog[0]) %>;
+        var dayLogData = [<%= dayLog[1] %>];
+    </script>
+
+    <canvas id="barChart"></canvas>
+
+    <script>
+        var ctxB = document.getElementById("barChart");
+        if (ctxB != null) {
+            ctxB.getContext('2d');
+            var barChart = new Chart(ctxB, {
+                type: 'bar',
+                data: {
+                    labels: dayLogCol,
+                    datasets: [{
+                        label: '# of Logs',
+                        data: dayLogData,
+                        backgroundColor: [
+                            
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

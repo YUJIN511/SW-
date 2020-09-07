@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Chart</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<!-- 합쳐지고 최소화된 최신 CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+	<!-- 부가적인 테마 -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+	<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+  <link type="text/css" href="../../css/server.css" rel="stylesheet">
+  <!-- Icons -->
+  <link href="../../vendor/nucleo/css/nucleo.css" rel="stylesheet">
+  <link href="../../vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <style>
+		p {
+			margin: 20px 0px;
+		}
+
+		table.type01 {
+			border-collapse: collapse;
+			text-align: left;
+			line-height: 1.5;
+			margin: 20px 10px;
+		}
+
+		table.type01 th {
+			width: 150px;
+			padding: 10px;
+			font-weight: bold;
+			vertical-align: top;
+			border: 1px solid #ccc;
+		}
+
+		table.type01 td {
+			width: 350px;
+			padding: 10px;
+			vertical-align: top;
+			border: 1px solid #ccc;
+		}
+
+		table.type01 .custom-control {
+			margin-left:2rem;
+			margin-right:2rem;
+			margin-top:2rem;
+			margin-bottom:2rem;
+		}
+
+	</style>
+</head>
+
+<body>
+
+	<nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
+	  <div class="container-fluid">
+	    <!-- Brand -->
+	    <a class="navbar-brand pt-0" href="/">
+	      <img src="../../images/brand.png" class="navbar-brand-img" alt="...">
+	    </a>
+	    <!-- Collapse -->
+	    <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+
+	      <!-- Navigation -->
+	      <ul class="navbar-nav">
+	        <li class="nav-item"  style="margin-bottom:1.5rem">
+	          <a class="nav-link" href="/list">
+	            <i class="ni ni-planet text-blue"></i> Dashboard
+	          </a>
+	        </li>
+	        <li class="nav-item" style="margin-bottom:1.5rem">
+	          <a class="nav-link" href="/">
+	            <i class="ni ni-bullet-list-67 text-red"></i> Chart
+	          </a>
+	        </li>
+	        <li class="nav-item" style="margin-bottom:1.5rem">
+	          <a class="nav-link" href="/">
+	            <i class="ni ni-key-25 text-info"></i> Login
+	          </a>
+	        </li>
+	        <li class="nav-item" style="margin-bottom:1.5rem">
+	          <a class="nav-link" href="/">
+	            <i class="ni ni-circle-08 text-pink"></i> Register
+	          </a>
+	        </li>
+	      </ul>
+
+	      <!-- Divider -->
+	    <hr class="my-3">
+	    <!-- Heading -->
+	    <h6 class="navbar-heading text-muted">Documentation</h6>
+	    <!-- Navigation -->
+	    <ul class="navbar-nav mb-md-3">
+	      <li class="nav-item">
+	        <a class="nav-link" href="/developer">
+	          <i class="ni ni-spaceship"></i> Developer
+	        </a>
+	      </li>
+	      <li class="nav-item">
+	       	<a class="nav-link" href="/sponsor ">
+	          <i class="ni ni-palette"></i> Sponsor
+	        </a>
+	      </li>
+	    </ul>
+
+	    </div>
+	  </div>
+	</nav>
+
+  <div class="main-content">
+    <!-- Top navbar -->
+    <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
+      <div class="container-fluid">
+        <!-- Brand -->
+        <a class="h1 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="/" style="font-size:30px;">
+          Chart</a>
+      </div>
+    </nav>
+    <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+      <div class="container-fluid">
+        <div class="header-body">
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid mt--7">
+			<div class="row">
+				<div class="col">
+					<div class="card shadow">
+  					<div class="container">
+			  		<form action="select" method="post">
+			  			<table class="type01">
+			  				<tr>
+			  					<!-- 첫번째 줄 시작 -->
+			  					<td>
+			  						<div classs="custom-control custom-radio" style="margin-left:2rem; margin-right:2rem; margin-top:2rem; margin-bottom:2rem">
+			  							<input type="radio" name="jbradio" id="jb-radio-1" class="custom-control-input" value="1">
+			  							<label class="custom-control-label" for="jb-radio-1" style="font-size:15px; font-weight:bold; margin-bottom:3rem">Number of logs per day</label>
+			  							<canvas id="barChart"></canvas>
+			  						</div>
+			  					</td>
+			  					<td>
+			  						<div classs="custom-control custom-radio" style="margin-left:2rem; margin-right:2rem; margin-top:2rem; margin-bottom:2rem">
+			  							<input type="radio" name="jbradio" id="jb-radio-2" class="custom-control-input" value="2">
+			  							<label class="custom-control-label" for="jb-radio-2" style="font-size:15px; font-weight:bold; margin-bottom:3rem">Frequency Ip address</label>
+			  							<canvas id="horizontalBar"></canvas>
+			  						</div>
+			  					</td>
+			  					<td>
+			  						<div classs="custom-control custom-radio" style="margin-left:2rem; margin-right:2rem; margin-top:2rem; margin-bottom:2rem">
+			  							<input type="radio" name="jbradio" id="jb-radio-3" class="custom-control-input" value="3">
+			  							<label class="custom-control-label" for="jb-radio-3" style="font-size:15px; font-weight:bold; margin-bottom:3rem">Page Status</label>
+			  							<canvas id="pieChart"></canvas>
+			  						</div>a
+			  					</td>
+			  				</tr><!-- 첫번째 줄 끝 -->
+						    <tr>
+			  					<!-- 두번째 줄 시작 -->
+								     <td>
+			  						<div classs="custom-control custom-radio" style="margin-left:2rem; margin-right:2rem; margin-top:2rem; margin-bottom:2rem">
+			  							<input type="radio" name="jbradio" id="jb-radio-4" class="custom-control-input" value="4">
+			  							<label class="custom-control-label" for="jb-radio-4" style="font-size:15px; font-weight:bold; margin-bottom:3rem">Operating System</label>
+			  							<canvas id="donutChart"></canvas>
+			  						</div>
+			  					</td>
+			  					<td>
+			  						<div classs="custom-control custom-radio" style="margin-left:2rem; margin-right:2rem; margin-top:2rem; margin-bottom:2rem">
+			  							<input type="radio" name="jbradio" id="jb-radio-5" class="custom-control-input" value="5">
+			  							<label class="custom-control-label" for="jb-radio-5" style="font-size:15px; font-weight:bold">Log Count by Time</label>
+			  							<div id="curve_chart"></div>
+			  						</div>
+			  					</td>
+			  					<td>
+			  						<div classs="custom-control custom-radio" style="margin-left:2rem; margin-right:2rem; margin-top:2rem; margin-bottom:2rem">
+			  							<input type="radio" name="jbradio" id="jb-radio-6" class="custom-control-input" value="6">
+			  							<label class="custom-control-label" for="jb-radio-6" style="font-size:15px; font-weight:bold">Error Log List</label>
+			  							<table class="table" style="margin-top:3rem">
+			  								<thead class="thead-light" style="text-align:center">
+			  									<tr style="font-size:15px; font-weight:bold">
+			  										<th scope="col">#</th>
+			  										<th scope="col">Content</th>
+			  									</tr>
+			  								</thead>
+			  								<tbody style="text-align:center">
+			  									<tr >
+			  										<th scope="row" style="font-size:15px; font-weight:bold">1</th>
+			  										<td style="font-size:15px; font-weight:bold">error log list1</td>
+			  									</tr>
+			  									<tr>
+			  										<th scope="row" style="font-size:15px; font-weight:bold">2</th>
+			  										<td style="font-size:15px; font-weight:bold">error log list2</td>
+			  									</tr>
+			  									<tr>
+			  										<th scope="row" style="font-size:15px; font-weight:bold">3</th>
+			  										<td style="font-size:15px; font-weight:bold">error log list3</td>
+			  									</tr>
+			  								</tbody>
+			  							</table>
+			  						</div>
+			  					</td>
+			  				</tr><!-- 두번째 줄 끝 -->
+			  				<tr>
+			  					<!-- 3번째 줄 시작 -->
+			  					<td>
+			  						<div classs="custom-control custom-radio" style="margin-left:2rem; margin-right:2rem; margin-top:2rem; margin-bottom:2rem">
+			  							<input type="radio" name="jbradio" id="jb-radio-7" class="custom-control-input" value="7">
+			  							<label class="custom-control-label" for="jb-radio-7" style="font-size:15px; font-weight:bold">Total Log</label>
+			  							<div class="panel panel-primary" style="margin-top:3rem">
+			  								<div class="panel-body" style="font-size:15px; font-weight:bold; text-align:center">
+			  									Total log count
+			  								</div>
+			  								<div class="panel-footer" style="font-size:15px; font-weight:bold; text-align:center">700,445</div>
+			  							</div>
+			  						</div>
+			  					</td>
+			  					<td>
+			  						<div classs="custom-control custom-radio" style="margin-left:2rem; margin-right:2rem; margin-top:2rem; margin-bottom:2rem">
+			  							<input type="radio" name="jbradio" id="jb-radio-8" class="custom-control-input" value="8">
+			  							<label class="custom-control-label" for="jb-radio-8" style="font-size:15px; font-weight:bold">Total Byte</label>
+			  							<div class="panel panel-warning" style="margin-top:3rem">
+			  								<div class="panel-body" style="font-size:15px; font-weight:bold; text-align:center">
+			  									Total Bytes
+			  								</div>
+			  								<div class="panel-footer" style="font-size:15px; font-weight:bold; text-align:center">455,887</div>
+			  							</div>
+			  						</div>
+			  					</td>
+			  					<td>
+			  						<div classs="custom-control custom-radio" style="margin-left:2rem; margin-right:2rem; margin-top:2rem; margin-bottom:2rem">
+			  							<input type="radio" name="jbradio" id="jb-radio-9" class="custom-control-input" value="9">
+			  							<label class="custom-control-label" for="jb-radio-9" style="font-size:15px; font-weight:bold;">Prev Page</label>
+			  							<div id="piechart_3d"></div>
+			  						</div>
+			  					</td>
+			  				</tr><!-- 3번째 줄 끝 -->
+			  				<tr>
+			  					<td colspan="3">
+			  							<div class="custom-control custom-radio" style="margin-left:2rem; margin-right:2rem; margin-top:2rem; margin-bottom:2rem">
+			  									<input type="radio" name="jbradio" id="jb-radio-10" class="custom-control-input" value="10">
+			  									<label class="custom-control-label" for="jb-radio-10" style="font-size:15px; font-weight:bold;">Map(Ip address)</label>
+			  									<div id="regions_div" style="width: 900px; height: 500px;"></div>
+			  							</div>
+			  					</td>
+			  				</tr>
+			  			</table>
+			  		</form>
+					</div>
+  			</div>
+  		</div>
+		</div>
+	</div>
+</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="/js/myChart.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+	<script src="https://cdn.rawgit.com/chartjs/Chart.js/master/samples/utils.js"></script>
+</body>
+
+</html>

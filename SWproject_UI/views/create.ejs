@@ -1,0 +1,47 @@
+<html>
+
+<head>
+  <!-- 합쳐지고 최소화된 최신 CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+  <!-- 부가적인 테마 -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <link type="text/css" href="css/server.css" rel="stylesheet">
+</head>
+
+<body class="bg-default">
+  <div class="main-content">
+    <!-- Navbar -->
+    <% include ./partials/auth/navbar %>
+    <!-- Page content -->
+    <div class="container mt--8 pb-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-7">
+          <div class="card bg-secondary shadow border-0">
+            <div class="card-body px-lg-5 py-lg-5">
+              <form role="form" action="/create" method="POST">
+                <div class="form-group mb-2" style="font-size:25px; font-weight:bold">
+                  Input Dashboard Name
+                </div>
+                <div class="form-group mx-sm-3 mb-2">
+                    <input class="form-control" type="text" name="dashname" placeholder="new dashboard" style="font-size:15px; margin-top:3rem; margin-bottom:2rem; padding-top:2rem; padding-bottom:2rem">
+                </div>
+                <div class="text-center">
+                  <button class="btn btn-primary my-4" style="font-size:15px">Confirm</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+</html>
